@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar Structure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            font-family: 'Georgia', serif;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 50px),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 50px);
+            opacity: 0.5;
+        }
+
+        body::after {
+            content: 'ENGLISH';
+            position: absolute;
+            font-size: 180px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.05);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            pointer-events: none;
+            letter-spacing: 20px;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .border-wrapper {
+            padding: 6px;
+            background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700, #ffed4e);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 200% 0%;
+            }
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 16px;
+            padding: 60px 40px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .example-section {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .example-sentence {
+            font-size: 32px;
+            color: #1e3c72;
+            font-weight: bold;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .word-labels {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .word-item {
+            text-align: center;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .word {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 8px;
+        }
+
+        .label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .structure-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #ffd700;
+        }
+
+        .structure-title {
+            font-size: 24px;
+            color: #1e3c72;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .structure-formula {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .structure-part {
+            text-align: center;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .structure-part:hover {
+            transform: translateY(-5px);
+        }
+
+        .structure-part-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #7e22ce;
+            margin-bottom: 5px;
+        }
+
+        .info-popup {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            min-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .info-popup::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: #2a5298;
+        }
+
+        .info-popup.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        .info-popup-title {
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-popup-content {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .plus-sign {
+            font-size: 28px;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .content-box {
+                padding: 40px 20px;
+            }
+            
+            .example-sentence {
+                font-size: 24px;
+            }
+            
+            .word {
+                font-size: 22px;
+            }
+            
+            .structure-formula {
+                flex-direction: column;
+            }
+            
+            .plus-sign {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="border-wrapper">
+            <div class="content-box">
+                <div class="example-section">
+                    <div class="example-sentence">
+                        We are not going to study next year
+                    </div>
+                    <div class="word-labels">
+                        <div class="word-item">
+                            <div class="word">We</div>
+                            <div class="label">Subject</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word">are</div>
+                            <div class="label">Verb Auxiliary</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word">not</div>
+                            <div class="label">Negative</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word">going to</div>
+                            <div class="label">Going To</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word">study</div>
+                            <div class="label">Main Verb</div>
+                        </div>
+                        <div class="word-item">
+                            <div class="word">next year</div>
+                            <div class="label">Complement</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="structure-section">
+                    <div class="structure-title">Grammar Formula</div>
+                    <div class="structure-formula">
+                        <div class="structure-part" onclick="toggleInfo(this)">
+                            <div class="structure-part-label">Subject</div>
+                            <div class="info-popup">
+                                <div class="info-popup-title">Quien realiza la acción</div>
+                                <div class="info-popup-content">I / She / They</div>
+                            </div>
+                        </div>
+                        <div class="plus-sign">+</div>
+                        <div class="structure-part" onclick="toggleInfo(this)">
+                            <div class="structure-part-label">Verb Auxiliary</div>
+                            <div class="info-popup">
+                                <div class="info-popup-content">am / is / are</div>
+                            </div>
+                        </div>
+                        <div class="plus-sign">+</div>
+                        <div class="structure-part" onclick="toggleInfo(this)">
+                            <div class="structure-part-label">Negative</div>
+                            <div class="info-popup">
+                                <div class="info-popup-content">not</div>
+                            </div>
+                        </div>
+                        <div class="plus-sign">+</div>
+                        <div class="structure-part" onclick="toggleInfo(this)">
+                            <div class="structure-part-label">Going To</div>
+                            <div class="info-popup">
+                                <div class="info-popup-content">Parte fija de la estructura</div>
+                            </div>
+                        </div>
+                        <div class="plus-sign">+</div>
+                        <div class="structure-part" onclick="toggleInfo(this)">
+                            <div class="structure-part-label">Main Verb</div>
+                            <div class="info-popup">
+                                <div class="info-popup-content">Verbo principal</div>
+                            </div>
+                        </div>
+                        <div class="plus-sign">+</div>
+                        <div class="structure-part" onclick="toggleInfo(this)">
+                            <div class="structure-part-label">Complement</div>
+                            <div class="info-popup">
+                                <div class="info-popup-content">Complemento, donde se completa la idea</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleInfo(element) {
+            const popup = element.querySelector('.info-popup');
+            const allPopups = document.querySelectorAll('.info-popup');
+            
+            allPopups.forEach(p => {
+                if (p !== popup) {
+                    p.classList.remove('active');
+                }
+            });
+            
+            popup.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.structure-part')) {
+                document.querySelectorAll('.info-popup').forEach(popup => {
+                    popup.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
